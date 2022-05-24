@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Pesquisa from './Pesquisa';
 import Button from './Button';
+import Category from './Category';
 
 export default class Base extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class Base extends Component {
       <div>
         <Pesquisa />
         <Button />
+        <Category />
       </div>
     );
   }
