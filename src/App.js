@@ -1,5 +1,4 @@
 import React from 'react';
-import Pesquisa from './components/Pesquisa';
 
 import './App.css';
 import Router from './Router';
@@ -11,7 +10,6 @@ import Router from './Router';
 function App() {
   return (
     <div className="App">
-      <Pesquisa />
       <Router />
     </div>
   );
