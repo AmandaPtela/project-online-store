@@ -1,5 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCard';
+import Button from './Button';
+import '../App.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Pesquisa extends React.Component {
@@ -40,12 +42,13 @@ class Pesquisa extends React.Component {
           >
             Pesquisar
           </button>
+          <Button />
         </div>
-        <div className="produtosEncontrados">
+        <div>
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
-          <div>
+          <div  className="produtosEncontrados">
             {products.map((product) => (
               <ProductCard
                 key={ product.id }
