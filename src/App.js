@@ -1,6 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+
 import './App.css';
+import Router from './Router';
 // import {getCategories, getProductsFromCategoryAndQuery} from './services/api';
 
 // console.log(getCategories().then(resp => console.log(resp)))
