@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './App.css';
+import Router from './Router';
 // import {getCategories, getProductsFromCategoryAndQuery} from './services/api';
 
 // console.log(getCategories().then(resp => console.log(resp)))
@@ -7,7 +9,9 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App" />
+    <div className="App">
+      <Router />
+    </div>
   );
 }
 
