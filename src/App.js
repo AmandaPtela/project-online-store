@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {getCategories, getProductsFromCategoryAndQuery} from './services/api';
+// import {getCategories, getProductsFromCategoryAndQuery} from './services/api';
 
 // console.log(getCategories().then(resp => console.log(resp)))
 // console.log(getProductsFromCategoryAndQuery().then(resp => console.log(resp)))
