@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.css';
 import Router from './Router';
 // import {getCategories, getProductsFromCategoryAndQuery} from './services/api';
