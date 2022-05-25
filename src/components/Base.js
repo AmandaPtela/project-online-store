@@ -5,12 +5,21 @@ import Category from './Category';
 import '../App.css';
 
 export default class Base extends Component {
+  state = {
+    valorInput: '',
+  }
+
+  guardarValorInput = (input) => {
+    this.setState({ valorInput: input });
+  }
+
   render() {
+    const { valorInput } = this.state;
     return (
       <div className="geral">
-        <Pesquisa />
+        <Pesquisa valorInput={ valorInput } />
         <Button />
-        <Category />
+        <Category guardarValorInput={ this.guardarValorInput } />
       </div>
     );
   }
