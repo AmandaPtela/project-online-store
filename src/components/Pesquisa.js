@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
 import '../App.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -9,19 +10,21 @@ class Pesquisa extends React.Component {
     products: [],
   };
 
-  handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ nameFilter: value });
-  };
-
   handleClick = async () => {
     const { nameFilter } = this.state;
+    const { valorInput } = this.props;
     const response = await getProductsFromCategoryAndQuery(
-      null,
+      valorInput,
       nameFilter,
     ).then((resp) => resp.results);
     this.setState({ products: response });
+    console.log(valorInput);
   };
+
+  handleChange = (event) => {
+    const { value } = event.target;
+    this.setState({ nameFilter: value });
+  }
 
   render() {
     const { products } = this.state;
@@ -49,11 +52,13 @@ class Pesquisa extends React.Component {
           <div className="produtosEncontrados">
             {products.map((product) => (
               <ProductCard
+                data-testid="product"
                 key={ product.id }
                 name={ product.title }
                 image={ product.thumbnail }
                 price={ product.price }
               />
+
             ))}
           </div>
         </div>
@@ -61,4 +66,9 @@ class Pesquisa extends React.Component {
     );
   }
 }
+
+Pesquisa.propTypes = {
+  valorInput: PropTypes.string.isRequired,
+};
+
 export default Pesquisa;
