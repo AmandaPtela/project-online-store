@@ -48,7 +48,7 @@ class Pesquisa extends React.Component {
           <h3 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h3>
-          <div  className="produtosEncontrados">
+          <div className="produtosEncontrados">
             {products.map((product) => (
               <ProductCard
                 key={ product.id }

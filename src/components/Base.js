@@ -7,7 +7,7 @@ import '../App.css';
 export default class Base extends Component {
   render() {
     return (
-      <div className="geral" >
+      <div className="geral">
         <Pesquisa />
         <Button />
         <Category />

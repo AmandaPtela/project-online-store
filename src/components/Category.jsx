@@ -25,7 +25,7 @@ export default class Category extends Component {
   render() {
     const { categorias, isChecked } = this.state;
     return (
-      <div className="categorias-select" >
+      <div className="categorias-select">
         {categorias.map((categoria) => (
           <label
             key={ categoria.id }
