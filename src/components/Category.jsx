@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 export default class Category extends Component {
   state = {
     categorias: [],
+    valorCategoria: '',
   };
 
   componentDidMount() {
     this.categorias();
+  }
+
+  componentDidUpdate(prevState) {
+    const { valorCategoria } = this.state;
+    if (valorCategoria !== prevState.valorCategoria) {
+      this.categorias();
+    }
   }
 
   categorias = async () => {
@@ -18,8 +27,12 @@ export default class Category extends Component {
   };
 
   handleCategory = (evento) => {
-    const { value } = evento.target;
-    console.log(value);
+    const { guardarValorInput } = this.props;
+    const { valorCategoria } = this.state;
+    // const { value } = evento.target;
+    const { id } = evento.target;
+    this.setState({ valorCategoria: id });
+    guardarValorInput(valorCategoria);
   };
 
   render() {
@@ -47,3 +60,7 @@ export default class Category extends Component {
     );
   }
 }
+
+Category.propTypes = {
+  guardarValorInput: PropTypes.func.isRequired,
+};
