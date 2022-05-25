@@ -10,13 +10,6 @@ class Pesquisa extends React.Component {
     products: [],
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    const { valorInput } = this.props;
-    if (valorInput !== prevState.valorInput) {
-      this.handleClick();
-    }
-  }
-
   handleClick = async () => {
     const { nameFilter } = this.state;
     const { valorInput } = this.props;
@@ -65,6 +58,7 @@ class Pesquisa extends React.Component {
                 image={ product.thumbnail }
                 price={ product.price }
               />
+
             ))}
           </div>
         </div>
