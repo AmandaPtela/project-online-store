@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import '../App.css';
-import PropTypes from 'prop-types';
-import { getCategories } from '../services/api';
+// import PropTypes from 'prop-types';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from './ProductCard';
 
 export default class Category extends Component {
   state = {
     categorias: [],
-    valorCategoria: '',
+    products: [],
   };
 
   componentDidMount() {
     this.categorias();
-  }
-
-  componentDidUpdate(prevState) {
-    const { valorCategoria } = this.state;
-    if (valorCategoria !== prevState.valorCategoria) {
-      this.categorias();
-    }
   }
 
   categorias = async () => {
@@ -27,16 +21,21 @@ export default class Category extends Component {
   };
 
   handleCategory = (evento) => {
-    const { guardarValorInput } = this.props;
-    const { valorCategoria } = this.state;
-    // const { value } = evento.target;
-    const { id } = evento.target;
-    this.setState({ valorCategoria: id });
-    guardarValorInput(valorCategoria);
+    const { id: value } = evento.target;
+    console.log(value);
+  };
+
+  handleClick = async (event) => {
+    const { id } = event.target;
+    const response = await getProductsFromCategoryAndQuery(
+      id,
+      null,
+    ).then((resp) => resp.results);
+    this.setState({ products: response });
   };
 
   render() {
-    const { categorias, isChecked } = this.state;
+    const { categorias, isChecked, products } = this.state;
     return (
       <div className="categorias-select">
         {categorias.map((categoria) => (
@@ -52,15 +51,25 @@ export default class Category extends Component {
               checked={ isChecked }
               value={ categoria.name }
               id={ categoria.id }
+              onClick={ this.handleClick }
             />
             {categoria.name}
           </label>
+
         ))}
+
+        <div>
+          {products.map((product) => (
+            <ProductCard
+              data-testid="product"
+              key={ product.id }
+              name={ product.title }
+              image={ product.thumbnail }
+              price={ product.price }
+            />
+          ))}
+        </div>
       </div>
     );
   }
 }
-
-Category.propTypes = {
-  guardarValorInput: PropTypes.func.isRequired,
-};
