@@ -7,7 +7,7 @@ class ProductCard extends React.Component {
     return (
       <li data-testid="product">
         <h3>{ name }</h3>
-        <img src={ image } alt={ price } />
+        <img height="180px" src={ image } alt={ price } />
         <span>{price}</span>
       </li>
     );

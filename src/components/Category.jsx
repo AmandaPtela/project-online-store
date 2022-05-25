@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { getCategories } from '../services/api';
 
 export default class Category extends Component {
@@ -24,7 +25,7 @@ export default class Category extends Component {
   render() {
     const { categorias, isChecked } = this.state;
     return (
-      <div>
+      <div className="categorias-select">
         {categorias.map((categoria) => (
           <label
             key={ categoria.id }
