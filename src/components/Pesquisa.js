@@ -1,6 +1,5 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-import Button from './Button';
 import '../App.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -42,7 +41,6 @@ class Pesquisa extends React.Component {
           >
             Pesquisar
           </button>
-          <Button />
         </div>
         <div>
           <h3 data-testid="home-initial-message">
