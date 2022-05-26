@@ -12,6 +12,7 @@ export default class Category extends Component {
   state = {
     categorias: [],
     products: [],
+    compras: JSON.parse(localStorage.getItem('infosCards')) || [],
   };
 
   componentDidMount() {
@@ -35,6 +36,13 @@ export default class Category extends Component {
     );
     this.setState({ products: response });
   };
+
+  onSave = (product) => {
+    const { compras } = this.state;
+    const todosOsProdutos = [...compras, product];
+    this.setState({ compras: todosOsProdutos });
+    localStorage.setItem('infosCards', JSON.stringify(todosOsProdutos));
+  }
 
   render() {
     const { categorias, isChecked, products } = this.state;
@@ -61,19 +69,29 @@ export default class Category extends Component {
 
         <div>
           {products.map((product) => (
-            <Link
-              to={ `/produto/${product.id}` }
-              key={ product.id }
-              data-testid="product-detail-link"
-            >
-              <ProductCard
-                data-testid="product"
+            <>
+              <Link
+                to={ `/produto/${product.id}` }
                 key={ product.id }
-                name={ product.title }
-                image={ product.thumbnail }
-                price={ product.price }
-              />
-            </Link>
+                data-testid="product-detail-link"
+              >
+                <ProductCard
+                  data-testid="product"
+                  key={ product.id }
+                  name={ product.title }
+                  image={ product.thumbnail }
+                  price={ product.price }
+                />
+              </Link>
+              <button
+                type="button"
+                onClick={ () => { this.onSave(product); } }
+                data-testid="product-add-to-cart"
+              >
+                Adicionar
+              </button>
+
+            </>
           ))}
         </div>
       </div>

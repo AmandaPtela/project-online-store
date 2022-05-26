@@ -9,6 +9,7 @@ class Pesquisa extends React.Component {
   state = {
     nameFilter: '',
     products: [],
+    compras: JSON.parse(localStorage.getItem('infosCards')) || [],
   };
 
   handleClick = async () => {
@@ -25,6 +26,13 @@ class Pesquisa extends React.Component {
     const { value } = event.target;
     this.setState({ nameFilter: value });
   };
+
+  onSave = (product) => {
+    const { compras } = this.state;
+    const todosOsProdutos = [...compras, product];
+    this.setState({ compras: todosOsProdutos });
+    localStorage.setItem('infosCards', JSON.stringify(todosOsProdutos));
+  }
 
   render() {
     const { products } = this.state;
@@ -68,6 +76,7 @@ class Pesquisa extends React.Component {
                 <button
                   type="button"
                   data-testid="product-detail-add-to-cart"
+                  onClick={ () => { this.onSave(product); } }
                 >
                   Adicionar
                 </button>
