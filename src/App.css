@@ -21,6 +21,11 @@
 
 }
 
+[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+} 
+
 .App-header {
   align-items: center;
   background-color: #282c34;
@@ -81,7 +86,6 @@ button {
   font-size: 30px;
   height: 60px;
   margin-right: 15px;
-  position: absolute;
   width: 200px;
 }
 
