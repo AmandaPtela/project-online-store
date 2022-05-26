@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Base from './components/Base';
+import CardsInfo from './components/CardsInfo';
 import Carrinho from './components/Carrinho';
 
 export default class Router extends Component {
@@ -10,6 +11,7 @@ export default class Router extends Component {
         <Switch>
           <Route exact path="/" component={ Base } />
           <Route exact path="/carrinho" component={ Carrinho } />
+          <Route exact path="/produto/:id" component={ CardsInfo } />
         </Switch>
       </BrowserRouter>
     );

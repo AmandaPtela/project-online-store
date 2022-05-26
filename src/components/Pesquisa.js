@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import '../App.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -18,13 +19,12 @@ class Pesquisa extends React.Component {
       nameFilter,
     ).then((resp) => resp.results);
     this.setState({ products: response });
-    console.log(valorInput);
   };
 
   handleChange = (event) => {
     const { value } = event.target;
     this.setState({ nameFilter: value });
-  }
+  };
 
   render() {
     const { products } = this.state;
@@ -51,14 +51,28 @@ class Pesquisa extends React.Component {
           </h3>
           <div className="produtosEncontrados">
             {products.map((product) => (
-              <ProductCard
-                data-testid="product"
-                key={ product.id }
-                name={ product.title }
-                image={ product.thumbnail }
-                price={ product.price }
-              />
+              <>
+                <Link
+                  to={ `/produto/${product.id}` }
+                  key={ product.id }
+                  data-testid="product-detail-link"
+                >
+                  <ProductCard
+                    data-testid="product-detail-link"
+                    key={ product.id }
+                    name={ product.title }
+                    image={ product.thumbnail }
+                    price={ product.price }
+                  />
+                </Link>
+                <button
+                  type="button"
+                  data-testid="product-detail-add-to-cart"
+                >
+                  Adicionar
+                </button>
 
+              </>
             ))}
           </div>
         </div>
