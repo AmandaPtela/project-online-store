@@ -21,11 +21,6 @@
 
 }
 
-[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-} 
-
 .App-header {
   align-items: center;
   background-color: #282c34;
