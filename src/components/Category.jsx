@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
 // import PropTypes from 'prop-types';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 import ProductCard from './ProductCard';
 
 export default class Category extends Component {
@@ -15,7 +19,6 @@ export default class Category extends Component {
   }
 
   categorias = async () => {
-    // const { categorias } = this.state;
     const categories = await getCategories().then();
     this.setState({ categorias: categories });
   };
@@ -27,10 +30,9 @@ export default class Category extends Component {
 
   handleClick = async (event) => {
     const { id } = event.target;
-    const response = await getProductsFromCategoryAndQuery(
-      id,
-      null,
-    ).then((resp) => resp.results);
+    const response = await getProductsFromCategoryAndQuery(id, null).then(
+      (resp) => resp.results,
+    );
     this.setState({ products: response });
   };
 
@@ -55,18 +57,23 @@ export default class Category extends Component {
             />
             {categoria.name}
           </label>
-
         ))}
 
         <div>
           {products.map((product) => (
-            <ProductCard
-              data-testid="product"
+            <Link
+              to={ `/produto/${product.id}` }
               key={ product.id }
-              name={ product.title }
-              image={ product.thumbnail }
-              price={ product.price }
-            />
+              data-testid="product-detail-link"
+            >
+              <ProductCard
+                data-testid="product"
+                key={ product.id }
+                name={ product.title }
+                image={ product.thumbnail }
+                price={ product.price }
+              />
+            </Link>
           ))}
         </div>
       </div>
