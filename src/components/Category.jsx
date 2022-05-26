@@ -24,10 +24,10 @@ export default class Category extends Component {
     this.setState({ categorias: categories });
   };
 
-  handleCategory = (evento) => {
-    const { id: value } = evento.target;
-    console.log(value);
-  };
+  // handleCategory = (evento) => {
+  //   const { id: value } = evento.target;
+  //   console.log(value);
+  // };
 
   handleClick = async (event) => {
     const { id } = event.target;

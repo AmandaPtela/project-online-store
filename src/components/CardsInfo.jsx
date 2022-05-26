@@ -13,8 +13,6 @@ const CardsInfo = () => {
   };
 
   const onSave = () => {
-    console.log('salvo');
-
     setTodosCards([...todosCards, infosCards]);
   };
 
