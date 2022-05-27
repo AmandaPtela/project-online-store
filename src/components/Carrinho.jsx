@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
+import { AiFillHome } from 'react-icons/ai';
+import { FiShoppingCart } from 'react-icons/fi';
+import './Styles/Carrinho.css';
 import { Link } from 'react-router-dom';
 
 const Carrinho = () => {
@@ -7,7 +9,6 @@ const Carrinho = () => {
   const [total, setTotal] = useState([]);
   const [contagem, setContagem] = useState(0);
   const [local, setLocal] = useState([]);
-  const [disabled, setDisabled] = useState(false);
 
   const verificaIgualdade = (cards) => {
     const novaLista = [];
@@ -32,16 +33,7 @@ const Carrinho = () => {
       verificaIgualdade(cards);
       setLista(cards);
       setContagem(cards.length);
-    }
-  }, []);
-
-  useEffect(() => {
-    setLocal(JSON.parse(localStorage.getItem('infosCards')));
-    const numero = 1;
-    if (contagem === numero) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
+      setLocal(JSON.parse(localStorage.getItem('infosCards')));
     }
   }, [contagem]);
 
@@ -71,47 +63,68 @@ const Carrinho = () => {
 
   return (
     <>
-      <p>{contagem}</p>
+      <p className="contagem">{`TOTAL: ${contagem} PRODUTOS`}</p>
+      <Link className="linkPagina" to="/">
+        <AiFillHome />
+      </Link>
       <div>
         {lista.length !== 0 ? (
-          <div>
-            {total.map((item) => (
-              <>
-                <h1 key={ item.id } data-testid="shopping-cart-product-name">
-                  {item.title}
-                </h1>
-                <img height="180px" src={ item.thumbnail } alt={ item.title } />
-                <button
-                  type="button"
-                  data-testid="product-increase-quantity"
-                  onClick={ () => {
-                    handleClickMais(item);
-                  } }
-                >
-                  +
-                </button>
-                <p data-testid="shopping-cart-product-quantity">
-                  {retornaValor(item.id)}
-                </p>
-                <button
-                  type="button"
-                  data-testid="product-decrease-quantity"
-                  disabled={ disabled }
-                  onClick={ () => {
-                    handleClickMenos(item.id);
-                  } }
-                >
-                  -
-                </button>
-              </>
-            ))}
-          </div>
+          <>
+            <div className="carrinho">
+              {total.map((item) => (
+                <div key={ item.id }>
+                  <h1
+                    data-testid="shopping-cart-product-name"
+                    className="titulo"
+                  >
+                    {item.title}
+                  </h1>
+                  <img height="180px" src={ item.thumbnail } alt={ item.title } />
+                  <div className="butoesCarrinho">
+                    <button
+                      className="butaoCarrinho butaoCarrinho__verde"
+                      type="button"
+                      data-testid="product-increase-quantity"
+                      onClick={ () => {
+                        handleClickMais(item);
+                      } }
+                    >
+                      +
+                    </button>
+                    <p
+                      className="quantidade"
+                      data-testid="shopping-cart-product-quantity"
+                    >
+                      {`${retornaValor(item.id)}`}
+                    </p>
+                    <button
+                      className="butaoCarrinho butaoCarrinho__vermelho"
+                      type="button"
+                      data-testid="product-decrease-quantity"
+                      disabled={ retornaValor(item.id) === 1 }
+                      onClick={ () => {
+                        handleClickMenos(item.id);
+                      } }
+                    >
+                      -
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link to="/checkout">
+              <button type="button" data-testid="checkout-products">
+                Checkout
+                {' '}
+                <FiShoppingCart />
+              </button>
+            </Link>
+          </>
         ) : (
           <h1 data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </h1>
         )}
-        <Link to="/">Pagina Inicial</Link>
       </div>
     </>
   );

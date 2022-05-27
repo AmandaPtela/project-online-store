@@ -17,8 +17,8 @@ export default class Base extends Component {
     const { valorInput } = this.state;
     return (
       <div className="geral">
-        <Pesquisa valorInput={ valorInput } />
         <Button />
+        <Pesquisa valorInput={ valorInput } />
         <Category guardarValorInput={ this.guardarValorInput } />
       </div>
     );
