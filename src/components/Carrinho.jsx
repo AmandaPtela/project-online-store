@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { FiShoppingCart } from 'react-icons/fi';
-import './Styles/Carrinho.css';
 import { Link } from 'react-router-dom';
 
 const Carrinho = () => {
